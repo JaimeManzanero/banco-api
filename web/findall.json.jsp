@@ -9,15 +9,11 @@
     EntidadBancariaService entidadBancariaService = new EntidadBancariaServiceImpl();
     List<EntidadBancaria> entidadesBancarias = entidadBancariaService.findAll();
     
-    int contador = 0;
-    for (EntidadBancaria entidadBancaria: entidadesBancarias){
-        
-        contador++;
-        ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = new ObjectMapper();
 
-        String jsonEntidadBancaria = objectMapper.writeValueAsString(entidadBancaria);
+    String jsonEntidadBancaria = objectMapper.writeValueAsString(entidadesBancarias);
+
+    out.println(jsonEntidadBancaria);
         
-        out.println(jsonEntidadBancaria);
-        
-    }
+    
 %>
