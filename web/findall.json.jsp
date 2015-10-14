@@ -1,3 +1,4 @@
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="com.fpmislata.banco.business.service.impl.EntidadBancariaServiceImpl"%>
 <%@page import="com.fpmislata.banco.business.service.EntidadBancariaService"%>
 <%@page import="com.fpmislata.banco.business.service.EntidadBancariaService"%>
@@ -8,25 +9,15 @@
     EntidadBancariaService entidadBancariaService = new EntidadBancariaServiceImpl();
     List<EntidadBancaria> entidadesBancarias = entidadBancariaService.findAll();
     
-%>
-[
-<%
     int contador = 0;
     for (EntidadBancaria entidadBancaria: entidadesBancarias){
         
         contador++;
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String jsonEntidadBancaria = objectMapper.writeValueAsString(entidadBancaria);
         
+        out.println(jsonEntidadBancaria);
+        
+    }
 %>
-{
-    "idEntidadBancaria":<%=entidadBancaria.getIdEntidadBancaria()%>,
-    "nombre":"<%=entidadBancaria.getNombre()%>",
-    "codigoEntidad":"<%=entidadBancaria.getCodigoEntidad()%>",
-    "fechaCreacion":"<%=entidadBancaria.getFechaCreacion()%>",
-    "direccion":"<%=entidadBancaria.getDireccion()%>",
-    "cif":"<%=entidadBancaria.getCIF()%>"
-}
-<%if(contador < entidadesBancarias.size()){%>
-,
-<% } %>
-<% } %>
-]
