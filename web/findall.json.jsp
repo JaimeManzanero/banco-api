@@ -1,3 +1,5 @@
+<%@page import="com.fpmislata.banco.presentation.json.impl.JsonTransformerImplJackson"%>
+<%@page import="com.fpmislata.banco.presentation.json.JsonTransformer"%>
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="com.fpmislata.banco.business.service.impl.EntidadBancariaServiceImpl"%>
 <%@page import="com.fpmislata.banco.business.service.EntidadBancariaService"%>
@@ -8,12 +10,9 @@
 <%
     EntidadBancariaService entidadBancariaService = new EntidadBancariaServiceImpl();
     List<EntidadBancaria> entidadesBancarias = entidadBancariaService.findAll();
-    
-    ObjectMapper objectMapper = new ObjectMapper();
+    JsonTransformer jsonTransformer = new JsonTransformerImplJackson();
 
-    String jsonEntidadBancaria = objectMapper.writeValueAsString(entidadesBancarias);
+    String jsonEntidadBancaria = jsonTransformer.toJson(entidadesBancarias);
 
     out.println(jsonEntidadBancaria);
-        
-    
 %>

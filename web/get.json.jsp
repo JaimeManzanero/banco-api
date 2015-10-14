@@ -1,4 +1,6 @@
 
+<%@page import="com.fpmislata.banco.presentation.json.impl.JsonTransformerImplJackson"%>
+<%@page import="com.fpmislata.banco.presentation.json.JsonTransformer"%>
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="com.fpmislata.banco.business.service.impl.EntidadBancariaServiceImpl"%>
 <%@page import="com.fpmislata.banco.business.service.EntidadBancariaService"%>
@@ -6,14 +8,12 @@
 <%@page contentType="application/json" pageEncoding="UTF-8"%>
 <%
 EntidadBancariaService entidadBancariaService = new EntidadBancariaServiceImpl();
-
 int idEntidadBancaria = Integer.parseInt(request.getParameter("idEntidadBancaria"));
-
 EntidadBancaria entidadBancaria = entidadBancariaService.get(idEntidadBancaria);
+JsonTransformer jsonTransformer = new JsonTransformerImplJackson();
 
-ObjectMapper objectMapper = new ObjectMapper();
 
-String jsonEntidadBancaria = objectMapper.writeValueAsString(entidadBancaria);
+String jsonEntidadBancaria = jsonTransformer.toJson(entidadBancaria);
 
 out.println(jsonEntidadBancaria);
 %>
