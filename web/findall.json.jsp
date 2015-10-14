@@ -15,6 +15,7 @@
     for (EntidadBancaria entidadBancaria: entidadesBancarias){
         
         contador++;
+        
 %>
 {
     "idEntidadBancaria":<%=entidadBancaria.getIdEntidadBancaria()%>,
