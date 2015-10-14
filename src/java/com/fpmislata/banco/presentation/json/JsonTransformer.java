@@ -10,6 +10,6 @@ package com.fpmislata.banco.presentation.json;
  * @author alumno
  */
 public interface JsonTransformer {
-    String toJson(Object object);
-    Object fromJson(String json, Class clazz);
+    public String toJson(Object object);
+    public <T> T fromJson(String json, Class<T> clazz);
 }

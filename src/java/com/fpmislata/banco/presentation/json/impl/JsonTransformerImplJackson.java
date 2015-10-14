@@ -8,6 +8,7 @@ package com.fpmislata.banco.presentation.json.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fpmislata.banco.presentation.json.JsonTransformer;
+import java.io.IOException;
 
 /**
  *
@@ -18,16 +19,25 @@ public class JsonTransformerImplJackson implements JsonTransformer {
     @Override
     public String toJson(Object object) {
         try {
+            
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(object);
+            
         } catch (JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Override
-    public Object fromJson(String json, Class clazz) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public <T> T fromJson(String json, Class<T> clazz) {
+        try {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(json, clazz);
+
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
-    
+
 }
