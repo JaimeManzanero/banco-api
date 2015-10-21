@@ -48,4 +48,17 @@ public class EntidadBancariaController {
             throw new RuntimeException(ex);
         }
     }
+    
+    @RequestMapping(value="/entidadBancaria/{id}", method=RequestMethod.DELETE)
+    public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int id){
+        
+        entidadBancariaService.delete(id);
+        httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        
+    }
+    
+    @RequestMapping(value="/entidadBancaria", method=RequestMethod.POST, produces="application/json")
+    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse){
+        
+    }
 }
