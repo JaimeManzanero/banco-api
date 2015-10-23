@@ -57,19 +57,21 @@ public class EntidadBancariaController {
         httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
     }
     
-    @RequestMapping(value="/entidadBancaria", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+    @RequestMapping(value="/entidadBancaria", method=RequestMethod.POST, produces="application/json")
     public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada){
         try{
             EntidadBancaria entidadBancaria = jsonTransformer.fromJson(jsonEntrada, EntidadBancaria.class);
-            jsonTransformer.toJson(entidadBancariaService.insert(entidadBancaria));
+            String jsonUsuario = jsonTransformer.toJson(entidadBancariaService.insert(entidadBancaria));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json");
+            httpServletResponse.getWriter().println(jsonUsuario);
         }catch(Exception ex){
 //            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             throw new RuntimeException(ex);
         }
     }
     
-    @RequestMapping(value="/entidadBancaria/", method=RequestMethod.PUT)
+    @RequestMapping(value="/entidadBancaria", method=RequestMethod.PUT)
     public void update(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada){
         EntidadBancaria entidadBancaria = jsonTransformer.fromJson(jsonEntrada, EntidadBancaria.class);
         try{
