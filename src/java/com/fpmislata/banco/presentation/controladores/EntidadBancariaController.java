@@ -76,10 +76,11 @@ public class EntidadBancariaController {
     @RequestMapping(value={"/entidadBancaria/"}, method=RequestMethod.PUT)
     public void update(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada){
         EntidadBancaria entidadBancaria = jsonTransformer.fromJson(jsonEntrada, EntidadBancaria.class);
+        EntidadBancaria entidadBancariaUpdated = entidadBancariaService.update(entidadBancaria);
         try{
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json");
-            httpServletResponse.getWriter().println(jsonTransformer.toJson(entidadBancariaService.update(entidadBancaria)));
+            httpServletResponse.getWriter().println(jsonTransformer.toJson(entidadBancariaUpdated));
         } catch (IOException ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
