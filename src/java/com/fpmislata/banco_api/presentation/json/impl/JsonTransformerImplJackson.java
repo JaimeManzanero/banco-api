@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fpmislata.banco.presentation.json.impl;
+package com.fpmislata.banco_api.presentation.json.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fpmislata.banco.presentation.json.JsonTransformer;
+import com.fpmislata.banco_api.presentation.json.JsonTransformer;
 import java.io.IOException;
 
 /**

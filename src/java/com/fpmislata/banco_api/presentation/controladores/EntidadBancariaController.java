@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fpmislata.banco.presentation.controladores;
+package com.fpmislata.banco_api.presentation.controladores;
 
 import com.fpmislata.banco.business.domain.EntidadBancaria;
 import com.fpmislata.banco.business.service.EntidadBancariaService;
-import com.fpmislata.banco.presentation.json.JsonTransformer;
+import com.fpmislata.banco_api.presentation.json.JsonTransformer;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;

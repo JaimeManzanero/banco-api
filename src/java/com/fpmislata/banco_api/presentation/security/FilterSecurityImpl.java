@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fpmislata.banco.presentation.security;
+package com.fpmislata.banco_api.presentation.security;
 
 import java.io.IOException;
 import javax.servlet.Filter;

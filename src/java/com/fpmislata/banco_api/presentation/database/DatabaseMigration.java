@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fpmislata.banco.presentation.json;
+package com.fpmislata.banco_api.presentation.database;
 
 /**
  *
  * @author alumno
  */
-public interface JsonTransformer {
-    public String toJson(Object object);
-    public <T> T fromJson(String json, Class<T> clazz);
+public interface DatabaseMigration {
+    void migrate();
 }
