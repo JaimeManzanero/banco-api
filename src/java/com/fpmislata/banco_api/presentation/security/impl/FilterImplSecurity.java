@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fpmislata.banco_api.presentation.security;
+package com.fpmislata.banco_api.presentation.security.impl;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -17,7 +17,7 @@ import javax.servlet.ServletResponse;
  *
  * @author alumno
  */
-public class FilterSecurityImpl implements Filter{
+public class FilterImplSecurity implements Filter{
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
