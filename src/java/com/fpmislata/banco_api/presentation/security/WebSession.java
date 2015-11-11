@@ -15,4 +15,30 @@ import java.util.Date;
 public class WebSession {
     private Usuario usuario;
     private Date fechaCreacion;
+
+    public WebSession(Usuario usuario, Date fechaCreacion) {
+        this.usuario = usuario;
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public WebSession() {
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+    
+    
 }

@@ -19,65 +19,68 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 public class EntidadBancariaController {
-    
+
     @Autowired
     EntidadBancariaService entidadBancariaService;
     @Autowired
     JsonTransformer jsonTransformer;
-    
-    @RequestMapping(value={"/entidadBancaria"}, method=RequestMethod.GET, produces="application/json")
+
+    @RequestMapping(value = {"/entidadBancaria"}, method = RequestMethod.GET, produces = "application/json")
     public void findAll(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         List<EntidadBancaria> entidadesBancarias = entidadBancariaService.findAll();
         String jsonEntidadBancaria = jsonTransformer.toJson(entidadesBancarias);
-        try{
+        try {
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().println(jsonEntidadBancaria);
-        }catch(IOException ex){
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
-    
-    @RequestMapping(value={"/entidadBancaria/{id}"}, method=RequestMethod.GET, produces="application/json")
-    public void get(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int id){
-        try{
+
+    @RequestMapping(value = {"/entidadBancaria/{id}"}, method = RequestMethod.GET, produces = "application/json")
+    public void get(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int id) {
+        try {
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().println(jsonTransformer.toJson(entidadBancariaService.get(id)));
-        }catch(IOException ex){
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
-    
-    @RequestMapping(value={"/entidadBancaria/{id}"}, method=RequestMethod.DELETE)
-    public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int id){
-        
+
+    @RequestMapping(value = {"/entidadBancaria/{id}"}, method = RequestMethod.DELETE)
+    public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int id) {
+
         entidadBancariaService.delete(id);
         httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
     }
-    
-    @RequestMapping(value={"/entidadBancaria/"}, method=RequestMethod.POST, consumes="application/json", produces="application/json")
-    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada){
+
+    @RequestMapping(value = {"/entidadBancaria"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         EntidadBancaria entidadBancaria = entidadBancariaService.insert(jsonTransformer.fromJson(jsonEntrada, EntidadBancaria.class));
         String jsonUsuario = jsonTransformer.toJson(entidadBancaria);
         httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         httpServletResponse.setContentType("application/json");
-        try{
+        try {
             httpServletResponse.getWriter().println(jsonUsuario);
-        }catch(Exception ex){
-//            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
-    
-    @RequestMapping(value={"/entidadBancaria/"}, method=RequestMethod.PUT)
-    public void update(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada){
-        EntidadBancaria entidadBancaria = jsonTransformer.fromJson(jsonEntrada, EntidadBancaria.class);
-        EntidadBancaria entidadBancariaUpdated = entidadBancariaService.update(entidadBancaria);
-        try{
+
+    @RequestMapping(value = {"/entidadBancaria/{id}"}, method = RequestMethod.PUT)
+    public void update(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada, @PathVariable("id") int id) {
+        
+        try {
+            EntidadBancaria entidadBancaria = jsonTransformer.fromJson(jsonEntrada, EntidadBancaria.class);
+            EntidadBancaria entidadBancariaUpdated = entidadBancariaService.update(entidadBancaria);
+            if(entidadBancaria.getIdEntidadBancaria() != id ){
+                throw new RuntimeException("IDs distintas, idEntidad: " + entidadBancaria.getIdEntidadBancaria() + ", idRuta: " + id);
+            }
+            
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().println(jsonTransformer.toJson(entidadBancariaUpdated));
