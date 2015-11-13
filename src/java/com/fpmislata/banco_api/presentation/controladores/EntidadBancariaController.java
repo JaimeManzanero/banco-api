@@ -71,7 +71,7 @@ public class EntidadBancariaController {
         }
     }
 
-    @RequestMapping(value = {"/entidadBancaria/{id}"}, method = RequestMethod.PUT)
+    @RequestMapping(value = {"/entidadBancaria/{id}"}, method = RequestMethod.PUT, produces="application/json")
     public void update(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada, @PathVariable("id") int id) {
         
         try {
