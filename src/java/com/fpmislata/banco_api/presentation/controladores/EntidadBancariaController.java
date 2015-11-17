@@ -36,6 +36,7 @@ public class EntidadBancariaController {
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().println(jsonEntidadBancaria);
         } catch (IOException ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             throw new RuntimeException(ex);
         }
     }
@@ -47,6 +48,7 @@ public class EntidadBancariaController {
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().println(jsonTransformer.toJson(entidadBancariaService.get(id)));
         } catch (IOException ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             throw new RuntimeException(ex);
         }
     }
@@ -67,6 +69,7 @@ public class EntidadBancariaController {
         try {
             httpServletResponse.getWriter().println(jsonUsuario);
         } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             throw new RuntimeException(ex);
         }
     }
