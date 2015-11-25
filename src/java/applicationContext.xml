@@ -11,6 +11,7 @@
   
     <bean class="com.fpmislata.banco_api.presentation.json.impl.JsonTransformerImplJackson" />
     <bean class="com.fpmislata.banco_api.presentation.database.impl.DatabaseMigrationImplFlyway" />
+    <bean class="com.fpmislata.banco_api.presentation.security.impl.WebSessionProviderImpl" />
  
  
 </beans>
